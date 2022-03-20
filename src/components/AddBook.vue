@@ -1,43 +1,43 @@
 <template>
   <v-container fluid>
-    <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-    >
-      <v-text-field
-        v-model="name"
-        label="Название книги"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="author"
-        label="Автор"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="year"
-        label="Год написания книги"
-        required
-      ></v-text-field>
-    
-      <v-btn
-        outlined
-        x-large
-        tile
-        @click="submit"
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
       >
-        Submit
-      </v-btn>
-      <v-btn
-        outlined
-        x-large
-        tile
-        @click="reset"
-      >
-        Reset
-      </v-btn>
-    </v-form>
+        <v-text-field
+          v-model="name"
+          label="Название книги"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="author"
+          label="Автор"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="year"
+          label="Год написания книги"
+          required
+        ></v-text-field>
+      
+        <v-btn
+          outlined
+          x-large
+          tile
+          @click="submit"
+        >
+          Сохранить
+        </v-btn>
+        <v-btn
+          outlined
+          x-large
+          tile
+          @click="reset"
+        >
+          Сбросить
+        </v-btn>
+      </v-form>
   </v-container>
 </template>
 
