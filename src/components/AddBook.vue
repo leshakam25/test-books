@@ -32,6 +32,7 @@
       <v-btn
         outlined
         x-large
+        tile
         @click="reset"
       >
         Reset
