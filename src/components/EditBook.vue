@@ -46,16 +46,20 @@ export default {
       this.$refs.form.reset();
     },
     submit() {
+      let currentBooks = JSON.parse(localStorage.getItem("books"));
+      let bookId = currentBook().id;
+      currentBooks.forEach(function (el, i) {
+        if (el.id == bookId) currentBooks.splice(i, 1);
+      });
       const newBook = {
         name: this.name,
         author: this.author,
         year: this.year,
         id: currentBook().id,
       };
-      const currentBooks = JSON.parse(localStorage.getItem("books")) || [];
       const updatedBooks = [...currentBooks, newBook];
       localStorage.setItem("books", JSON.stringify(updatedBooks));
-      console.log("updatedBooks", updatedBooks);
+      console.log(currentBooks);
     },
   },
 };

@@ -22,6 +22,11 @@ const routes = [
     name: "EditBook",
     component: EditBook,
   },
+  {
+    path: "/:id",
+    name: "DeleteBook",
+    component: Books,
+  },
 ];
 
 const router = new VueRouter({
