@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid>
-    <v-form ref="form" v-model="valid" lazy-validation>
+  <v-container>
+    <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="name"
         label="Название книги"
@@ -17,58 +17,51 @@
         label="Введите ссылку на изображение"
         required
       ></v-text-field>
-
       <v-btn outlined x-large tile @click="submit"> Сохранить </v-btn>
-      <v-btn outlined x-large tile>
-        <router-link to="/">Отменить</router-link>
-      </v-btn>
+      <v-btn outlined x-large tile> Отменить </v-btn>
     </v-form>
   </v-container>
 </template>
-
 <script>
-import { uuid } from "vue-uuid";
-
-const currentBook = () => {
-  let urlId = window.location.pathname;
-  let editBooks = JSON.parse(localStorage.getItem("books"));
-  let currentBook = editBooks.find((item) => item.id == urlId.slice(6));
-  return currentBook;
-};
-
 export default {
+  created() {
+    const id = this.$route.params.id;
+    const editBooks = JSON.parse(localStorage.getItem("books"));
+    const currentBook = editBooks.find((item) => item.id === id);
+    const { name, year, author, imag } = currentBook;
+    this.uuid = id;
+    this.name = name;
+    this.year = year;
+    this.imag = imag;
+    this.author = author;
+  },
   data: () => ({
     valid: true,
-    name: currentBook().name || "",
-    author: currentBook().author || "",
-    year: currentBook().year || "",
-    imag: currentBook().imag || "",
-    uuid: uuid.v1(),
+    name: "",
+    author: "",
+    year: "",
+    imag: "",
+    uuid: "",
   }),
 
   methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
     reset() {
       this.$refs.form.reset();
     },
     submit() {
       let currentBooks = JSON.parse(localStorage.getItem("books"));
-      let bookId = currentBook().id;
-      currentBooks.forEach(function (el, i) {
-        if (el.id == bookId) currentBooks.splice(i, 1);
-      });
+      console.log("currentBooks", currentBooks);
       const newBook = {
         name: this.name,
         author: this.author,
         year: this.year,
         imag: this.imag,
-        id: currentBook().id,
+        id: this.uuid,
       };
-      const updatedBooks = [...currentBooks, newBook];
-      localStorage.setItem("books", JSON.stringify(updatedBooks));
-      console.log(currentBooks);
+      const elementIndex = currentBooks.findIndex((x) => x.id === this.uuid);
+      currentBooks[elementIndex] = newBook;
+      localStorage.setItem("books", JSON.stringify(currentBooks));
+      this.$router.push("/");
     },
   },
 };

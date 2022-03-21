@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <nav>
-      <v-btn outlined large tile>
-        <router-link to="/">Список книг</router-link>
-      </v-btn>
-      <v-btn outlined large tile>
-        <router-link to="/add">Добавить книгу</router-link>
-      </v-btn>
+      <router-link to="/">
+        <v-btn outlined large tile> Список книг </v-btn></router-link
+      >
+      <router-link to="/add"
+        ><v-btn outlined large tile> Добавить книгу </v-btn></router-link
+      >
     </nav>
     <router-view />
   </div>

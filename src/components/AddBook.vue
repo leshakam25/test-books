@@ -1,10 +1,11 @@
 <template>
-  <v-container fluid>
-    <v-form ref="form" v-model="valid" lazy-validation>
+  <v-container>
+    <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="name"
         label="Название книги"
         required
+        autofocus
         :rules="nameRules"
       ></v-text-field>
       <v-text-field
@@ -25,10 +26,8 @@
         required
         :rules="imagRules"
       ></v-text-field>
-
       <v-btn :disabled="!valid" outlined x-large tile @click="submit">
         Сохранить
-        <!-- <router-link to="/">Сохранить</router-link> -->
       </v-btn>
       <v-btn outlined x-large tile @click="reset"> Сбросить </v-btn>
     </v-form>
@@ -40,7 +39,7 @@ import { uuid } from "vue-uuid";
 
 export default {
   data: () => ({
-    valid: true,
+    valid: false,
     name: "",
     author: "",
     year: "",
@@ -62,9 +61,6 @@ export default {
   }),
 
   methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
     reset() {
       this.$refs.form.reset();
     },
@@ -79,8 +75,9 @@ export default {
       const currentBooks = JSON.parse(localStorage.getItem("books")) || [];
       const updatedBooks = [...currentBooks, newBook];
       localStorage.setItem("books", JSON.stringify(updatedBooks));
-      console.log("updatedBooks", updatedBooks);
-      (this.name = ""), (this.author = ""), (this.year = ""), (this.imag = "");
+      this.valid = false;
+      this.reset();
+      this.$router.push("/");
     },
   },
 };

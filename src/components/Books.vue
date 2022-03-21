@@ -42,23 +42,23 @@
                   </svg>
                 </v-btn>
               </router-link>
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'DeleteBook', params: { id: book.id } }"
-              >
-                <v-btn icon outlined large tile @click="del">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-                    /></svg
-                ></v-btn>
-              </router-link>
+              > -->
+              <v-btn icon outlined large tile @click="del(book.id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                  /></svg
+              ></v-btn>
+              <!-- </router-link> -->
             </td>
           </tr>
         </tbody>
@@ -79,17 +79,25 @@ export default {
     };
   },
   methods: {
-    del() {
-      const books = [];
-      let editBooks = JSON.parse(localStorage.getItem("books"));
+    del(id) {
+      // const books = [];
+      const filterById = (book) => {
+        return book.id !== id;
+      };
 
-      for (let i = 0; i < editBooks.length; i++) {
-        if (editBooks[i].id !== window.location.pathname.slice(1)) {
-          books.push(editBooks[i]);
-        }
-      }
-      localStorage.removeItem("books");
-      localStorage.setItem("books", JSON.stringify(books));
+      const newBooks = this.books.filter(filterById);
+      console.log("newBooks", newBooks);
+      this.books = newBooks;
+      localStorage.setItem("books", JSON.stringify(newBooks));
+
+      // let editBooks = JSON.parse(localStorage.getItem("books"));
+
+      // for (let i = 0; i < editBooks.length; i++) {
+      //   if (editBooks[i].id !== window.location.pathname.slice(1)) {
+      //     books.push(editBooks[i]);
+      //   }
+      // }
+      // localStorage.removeItem("books");
     },
   },
 };
