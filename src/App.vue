@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Список книг</router-link> |
-      <router-link to="/add">Добавить книгу</router-link>
+      <v-btn outlined large tile>
+        <router-link to="/">Список книг</router-link>
+      </v-btn>
+      <v-btn outlined large tile>
+        <router-link to="/add">Добавить книгу</router-link>
+      </v-btn>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -21,9 +25,13 @@ nav {
   padding: 30px;
 
   a {
+    font-size: 16px;
     font-weight: bold;
     color: #2c3e50;
-
+    text-decoration: none;
   }
+}
+button {
+  margin: 0.5px;
 }
 </style>

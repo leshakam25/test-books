@@ -12,9 +12,16 @@
         label="Год написания книги"
         required
       ></v-text-field>
+      <v-text-field
+        v-model="imag"
+        label="Введите ссылку на изображение"
+        required
+      ></v-text-field>
 
       <v-btn outlined x-large tile @click="submit"> Сохранить </v-btn>
-      <v-btn outlined x-large tile @click="reset"> Сбросить </v-btn>
+      <v-btn outlined x-large tile>
+        <router-link to="/">Отменить</router-link>
+      </v-btn>
     </v-form>
   </v-container>
 </template>
@@ -35,6 +42,7 @@ export default {
     name: currentBook().name || "",
     author: currentBook().author || "",
     year: currentBook().year || "",
+    imag: currentBook().imag || "",
     uuid: uuid.v1(),
   }),
 
@@ -55,6 +63,7 @@ export default {
         name: this.name,
         author: this.author,
         year: this.year,
+        imag: this.imag,
         id: currentBook().id,
       };
       const updatedBooks = [...currentBooks, newBook];
@@ -66,4 +75,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  font-size: 16px;
+  color: #2c3e50;
+  text-decoration: none;
+}
 </style>

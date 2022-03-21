@@ -8,12 +8,20 @@
             <th class="text-left">Название</th>
             <th class="text-left">Автор</th>
             <th class="text-left">Дата создания</th>
-            <th class="text-left">Редактировать</th>
+            <th class="text-left">Редактировать/<br />удалить</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="book in books" :key="book.id">
-            <td>{{ book.logo }}</td>
+            <td>
+              <v-img
+                :src="book.imag"
+                width="120px"
+                height="120px"
+                alt="no logo"
+                contain
+              ></v-img>
+            </td>
             <td>{{ book.name }}</td>
             <td>{{ book.author }}</td>
             <td>{{ book.year }}</td>
@@ -72,14 +80,16 @@ export default {
   },
   methods: {
     del() {
-      let currentBooks = JSON.parse(localStorage.getItem("books"));
-      let bookId = window.location.pathname;
-      currentBooks.forEach(function (el, i) {
-        if (el.id == bookId) currentBooks.splice(i, 1);
-      });
-      const updatedBooks = [...currentBooks];
-      localStorage.setItem("books", JSON.stringify(updatedBooks));
-      console.log(currentBooks);
+      const books = [];
+      let editBooks = JSON.parse(localStorage.getItem("books"));
+
+      for (let i = 0; i < editBooks.length; i++) {
+        if (editBooks[i].id !== window.location.pathname.slice(1)) {
+          books.push(editBooks[i]);
+        }
+      }
+      localStorage.removeItem("books");
+      localStorage.setItem("books", JSON.stringify(books));
     },
   },
 };
