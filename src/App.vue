@@ -32,6 +32,7 @@ nav {
   }
 }
 button {
-  margin: 0.5px;
+  margin: 4px;
+  width: 200px;
 }
 </style>
