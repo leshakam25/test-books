@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr v-for="book in books" :key="book.id">
-            <td>
+            <td class="center">
               <v-img
                 :src="book.imag"
                 width="120px"
@@ -73,31 +73,18 @@ export default {
 
   data() {
     const books = JSON.parse(localStorage.getItem("books")) || [];
-    console.log("books", books);
     return {
       books,
     };
   },
   methods: {
     del(id) {
-      // const books = [];
       const filterById = (book) => {
         return book.id !== id;
       };
-
       const newBooks = this.books.filter(filterById);
-      console.log("newBooks", newBooks);
       this.books = newBooks;
       localStorage.setItem("books", JSON.stringify(newBooks));
-
-      // let editBooks = JSON.parse(localStorage.getItem("books"));
-
-      // for (let i = 0; i < editBooks.length; i++) {
-      //   if (editBooks[i].id !== window.location.pathname.slice(1)) {
-      //     books.push(editBooks[i]);
-      //   }
-      // }
-      // localStorage.removeItem("books");
     },
   },
 };
