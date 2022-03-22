@@ -18,7 +18,7 @@
         required
       ></v-text-field>
       <v-btn outlined x-large tile @click="submit"> Сохранить </v-btn>
-      <v-btn outlined x-large tile> Отменить </v-btn>
+      <v-btn outlined x-large tile @click="back"> Отменить </v-btn>
     </v-form>
   </v-container>
 </template>
@@ -45,8 +45,8 @@ export default {
   }),
 
   methods: {
-    reset() {
-      this.$refs.form.reset();
+    back() {
+      this.$router.push("/");
     },
     submit() {
       let currentBooks = JSON.parse(localStorage.getItem("books"));

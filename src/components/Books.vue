@@ -13,14 +13,16 @@
         </thead>
         <tbody>
           <tr v-for="book in books" :key="book.id">
-            <td class="center">
-              <v-img
-                :src="book.imag"
-                width="120px"
-                height="120px"
-                alt="no logo"
-                contain
-              ></v-img>
+            <td>
+              <v-layout>
+                <v-img
+                  max-height="120px"
+                  max-width="80px"
+                  :src="book.imag"
+                  alt="no logo"
+                  contain
+                ></v-img
+              ></v-layout>
             </td>
             <td>{{ book.name }}</td>
             <td>{{ book.author }}</td>
